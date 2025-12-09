@@ -23,23 +23,31 @@ _Update the numbers above with your latest terminal output._
 
 ## 🛠 Build & Run
 git clone https://github.com/Saanvirajput/cpp-learned-index.git
+
 cd cpp-learned-index
+
 mkdir build && cd build
+
 cmake ..
+
 cmake --build .
+
 ./learned_index
 
 
 
 ### Test endpoints
 Benchmark throughput
+
 echo "benchmark" | nc localhost 8081
 
 Search for a key
+
 echo "search=123456789" | nc localhost 8081
 
 
-Example response: {"status":"🧠","speed":"384.1M/sec","speedup":"10x","dataset":"10M keys"}
+Example response: 
+{"status":"🧠","speed":"384.1M/sec","speedup":"10x","dataset":"10M keys"}
 {"key":123456789,"position":901142,"found_key":123457057,"speed":"120M/sec"}
 
 
