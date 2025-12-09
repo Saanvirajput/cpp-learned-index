@@ -77,3 +77,13 @@ cpp-learned-index/
 - **Training**: split keys into 64 segments; for each segment, fit `position ≈ slope * key + intercept`.
 - **Lookup**: pick segment, predict index, then scan a small window around it to correct error.
 - **Server**: TCP loop using `std::thread` per client with a simple text protocol (`benchmark`, `search=...`).
+
+```bash
+cd ~/cpp-learned-index/build
+cmake --build .
+./learned_index
+```
+```
+echo "benchmark" | nc localhost 8081
+echo "search=123456789" | nc localhost 8081
+```
