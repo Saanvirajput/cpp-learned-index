@@ -3,7 +3,7 @@
 High-performance learned index over 10M sorted keys in modern C++20.  
 Replaces binary search (`std::lower_bound`) with segmented linear models plus a small local correction window to speed up point lookups.
 
----
+***
 
 ## Features
 
@@ -15,7 +15,7 @@ Replaces binary search (`std::lower_bound`) with segmented linear models plus a 
   - `search=<key>` → position and stored key.
 - Pure C++ + POSIX sockets (no external libraries).
 
----
+***
 
 ## Benchmarks (example)
 
@@ -25,39 +25,40 @@ Update with your real numbers from the terminal:
 - `std::lower_bound`: **~45M lookups/sec**
 - Speedup: **~8.4×**
 
----
+***
 
 ## Build & Run
 
+```bash
 git clone https://github.com/Saanvirajput/cpp-learned-index.git
 cd cpp-learned-index
 mkdir build && cd build
 cmake ..
 cmake --build .
 ./learned_index
+```
 
-text
 
 ### Test endpoints
 
+```bash
 Benchmark throughput
 echo "benchmark" | nc localhost 8081
 
 Search for a key
 echo "search=123456789" | nc localhost 8081
+```
 
-text
 
 Example response:
+```bash
 
 {"status":"🧠","speed":"384.1M/sec","speedup":"10x","dataset":"10M keys"}
 {"key":123456789,"position":901142,"found_key":123457057,"speed":"120M/sec"}
-
-text
-
----
+```
 
 ## Project Structure
+```bash
 
 cpp-learned-index/
 ├── CMakeLists.txt # CMake build config
@@ -66,7 +67,7 @@ cpp-learned-index/
 ├── build/ # CMake build output
 └── frontend/ # React + Vite demo UI (optional)
 
-text
+```
 
 ---
 
