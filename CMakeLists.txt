@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.20)
+project(LearnedIndex LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 20)
+add_executable(learned_index src/main.cpp)
+target_compile_options(learned_index PRIVATE -O3 -march=native -flto)

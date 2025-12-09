@@ -1,0 +1,3 @@
+/home/raven/cpp-learned-index/build/CMakeFiles/learned_index.dir
+/home/raven/cpp-learned-index/build/CMakeFiles/edit_cache.dir
+/home/raven/cpp-learned-index/build/CMakeFiles/rebuild_cache.dir
