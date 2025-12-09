@@ -1,16 +1,73 @@
-# React + Vite
+# 🧠 Learned Index Search Engine (C++20)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+High-performance learned index over 10M sorted keys, implemented in modern C++20.  
+Replaces traditional binary search (`std::lower_bound`) with segmented linear models + local correction to achieve much higher lookup throughput.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- C++20 implementation of a **learned index** (neural B-tree style).
+- 64 segmented linear models trained with simple linear regression.
+- Fast lookup: model prediction + tiny local search around the predicted position.
+- Lightweight TCP server on port `8081`:
+  - `echo "benchmark" | nc localhost 8081` → reports lookups/sec and dataset size.
+  - `echo "search=123456789" | nc localhost 8081` → returns key, position, and found value.
+- Pure C++ (no external dependencies beyond standard library and POSIX sockets).
 
-## React Compiler
+## 🚀 Benchmarks  (on my laptop)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Learned index: **≈ 380M lookups/sec**
+- `std::lower_bound`: **≈ 45M lookups/sec**
+- Speedup: **≈ 8.4×**
 
-## Expanding the ESLint configuration
+_Update the numbers above with your latest terminal output._
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠 Build & Run
+git clone https://github.com/Saanvirajput/cpp-learned-index.git
+cd cpp-learned-index
+mkdir build && cd build
+cmake ..
+cmake --build .
+./learned_index
+
+
+
+### Test endpoints
+Benchmark throughput
+echo "benchmark" | nc localhost 8081
+
+Search for a key
+echo "search=123456789" | nc localhost 8081
+
+
+Example response: {"status":"🧠","speed":"384.1M/sec","speedup":"10x","dataset":"10M keys"}
+{"key":123456789,"position":901142,"found_key":123457057,"speed":"120M/sec"}
+
+
+## 📁 Project Structure
+cpp-learned-index/
+├── CMakeLists.txt # CMake build config
+├── src/
+│ └── main.cpp # Learned index + TCP server
+├── build/ # CMake build output (ignored in Git)
+└── frontend/ # React + Vite demo UI (optional)
+
+
+## 🧩 Design Overview
+
+- **Dataset**: 10M synthetic keys, sorted to simulate a production index.
+- **Model training**:
+  - Split key space into 64 segments.
+  - For each segment, fit `position = slope * key + intercept`.
+- **Lookup**:
+  - Choose segment/model.
+  - Predict approximate index.
+  - Correct within a small local window to find the exact position.
+- **Server**:
+  - Minimal TCP server on port `8081`, `std::thread` per connection.
+  - JSON-like responses for easy integration with dashboards/clients.
+
+## 🔭 Future Work
+
+- Support dynamic inserts and deletes with online retraining.
+- Replace per-request threads with a thread pool and connection reuse.
+- Add unit tests and GitHub Actions CI for regression benchmarks.
