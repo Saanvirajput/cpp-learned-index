@@ -69,6 +69,18 @@ cpp-learned-index/
 
 ## 🛠️ High-Level Design
 
+### Lookup Logic Flow
+```mermaid
+graph TD
+    A[Search Key] --> B{Model Selection}
+    B -->|Binary Search| C[Segment Model]
+    C --> D[Model Prediction]
+    D --> E[Approximate Index]
+    E --> F{Local Correction}
+    F -->|Linear Scan| G[Final Position]
+    G --> H[Return Value]
+```
+
 - **Dataset**: 10,000,000 synthetic keys sorted to mimic real-world indexed data.
 - **Training**: Data is split into 64 segments. For each segment, a linear model (`y = mx + c`) is fitted via simple linear regression.
 - **Lookup**:
