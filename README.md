@@ -3,6 +3,8 @@
 High-performance learned index over 10M sorted keys in modern C++20.  
 Replaces binary search (`std::lower_bound`) with segmented linear models plus a small local correction window to speed up point lookups.
 
+**Live Demo**: [https://Saanvirajput.github.io/cpp-learned-index/](https://Saanvirajput.github.io/cpp-learned-index/)
+
 ***
 
 ## ✨ Features
