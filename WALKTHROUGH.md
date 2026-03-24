@@ -38,3 +38,11 @@ $$y = mx + b$$
 $$MSE = \frac{1}{n} \sum (y - \hat{y})^2$$
 
 **The "Complete Build" is now live and ready for production-level demonstration.**
+
+---
+
+## 🌐 How to Activate the Live Link
+To make the site accessible at [https://Saanvirajput.github.io/cpp-learned-index/](https://Saanvirajput.github.io/cpp-learned-index/), please perform this one-time activation:
+1.  Go to your GitHub Repository **Settings** > **Pages**.
+2.  Under **Build and deployment**, change the **Source** from "Deploy from a branch" to **"GitHub Actions"**.
+3.  Once saved, the site will go live automatically! 🚀🏁
