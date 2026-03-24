@@ -281,6 +281,17 @@ function App() {
                         <button onClick={handleSearch} style={{ position: 'absolute', right: '14px', top: '14px', bottom: '14px', padding: '0 2.5rem', borderRadius: '22px', background: 'linear-gradient(135deg, #6366f1, #4f46e5)', border: 'none', color: 'white', fontWeight: '800', cursor: 'pointer', letterSpacing: '1px' }}>SEARCH</button>
                     </div>
 
+                    {/* Suggested Searches for Laymen */}
+                    <div style={{ display: 'flex', gap: '10px', marginTop: '-1.5rem', flexWrap: 'wrap' }}>
+                        <span style={{ fontSize: '0.75rem', opacity: 0.4, fontWeight: 'bold', paddingTop: '8px' }}>SUGGESTED:</span>
+                        {['google', 'antigravity', 'tesla', 'deepmind', 'search'].map(s => (
+                            <button key={s} onClick={() => { setQuery(s); setResult(index.search(s)); }} 
+                                style={{ padding: '6px 14px', borderRadius: '100px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.6)', fontSize: '0.75rem', fontWeight: '700', cursor: 'pointer', transition: '0.2s' }}>
+                                {s}
+                            </button>
+                        ))}
+                    </div>
+
                     {result && (
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem' }}>
                             <GlassCard title="Regression Analysis" icon={TrendingUp}>
